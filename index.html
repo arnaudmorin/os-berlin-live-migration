@@ -34,7 +34,6 @@
                     </section>
                     <section data-markdown>
                         ## Julien COSMAO
-                        #### blabla
                     </section>
                     <section data-markdown>
                         ## Arnaud MORIN
@@ -69,32 +68,43 @@
                 </section>
 
                 <section>
-                     <section data-markdown>                                      
+                     <section data-markdown>
                          ## Context
-                         * almost 25 openstack regions                            
-                         * more than 11k computes                                 
+                         * almost 25 openstack regions
+                         * more than 11k computes
                          * almost 300k instances
-                         * oldest regions are using OpenStack JUNO                
-                         * newest regions are using OpenStack NEWTON              
+                         * oldest regions are using OpenStack JUNO
+                         * newest regions are using OpenStack NEWTON
                      </section>
-                     <section data-markdown>                                      
-                         ### Live migration                                       
+                     <section data-markdown>
+                         ### Live migration
                          * maintenance purpose (kernel upgrade, compute reinstall)
-                         * more live-migration --> more bugs                      
-                         * Spectre / meltdown / foreshadow                        
+                         * more live-migration --> more bugs
+                         * Spectre / meltdown / foreshadow
                      </section>
-                     <section data-markdown>                                      
-                         ### Upgrade from Juno to Newton                          
+                     <section data-markdown>
+                         ### Upgrade from Juno to Newton
                          * keep consistency between infra
-                         * drop old releases                                      
-                         * bring new services                                     
+                         * drop old releases
+                         * bring new services
                          * Newton --> easier to upgrade to newer releases
                      </section>
-                 </section>                                                       
+                 </section>
 
                 <section>
                     <section data-markdown>
                         ## Nova live migration
+                    </section>
+                    <section data-markdown>
+                        ## Workflow
+
+                        * Environment
+                            - Juno on Ubuntu Trusty
+                            - Qemu 2.3 / libvirt 1.3.1
+
+                        * Maintenance / kernel upgrade process
+                            - Live migrate all instances
+                            - schema
                     </section>
                     <section data-markdown data-background="data/headache.gif">
                         ## Multiple instances cases
@@ -105,6 +115,24 @@
                         * \+ GPU
                         * \+ FPGA
                         * \+ different CPU sockets
+                    </section>
+                    <section data-markdown>
+                        ### Live migration issues
+
+                        * Instances fail to live migrate on loaded computes
+                            - migration take long time or never finish
+                            - instance need to be suspended
+
+                        * Enable auto convergence
+                            - cpu throttling
+                            - Need qemu 2.5 / libvirt 1.3.3
+
+                        ```
+                        /etc/nova/nova.conf
+
+                        block_migration_flag= ... , VIR_MIGRATE_AUTO_CONVERGE
+                        live_migration_flag= ..., VIR_MIGRATE_AUTO_CONVERGE
+                        ```
                     </section>
                     <section data-markdown>
                         ### Patching / cherry-picking
