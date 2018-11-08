@@ -119,19 +119,44 @@
                     <section data-markdown>
                         ### Live migration issues
 
-                        * Instances fail to live migrate on loaded computes
+                        * Fail to live migrate on loaded instances
                             - migration take long time or never finish
                             - instance need to be suspended
+                            - reproduce case with stress
+
+                        ```bash
+                        # source host
+                        $ virsh domjobinfo 9c2d1068-fe0b-4ee3-b860-c00c9688cf49
+                        Job type:         Unbounded
+                        Time elapsed:     172795       ms
+
+                        # Destination host, after instance suspend
+                        $ virsh domjobinfo 9c2d1068-fe0b-4ee3-b860-c00c9688cf49 --completed
+                        Job type:         Completed
+                        Time elapsed:     942 798   ms
+                        Data processed:   572.901 GiB
+                        Iteration:        224
+                        ...
+
+                        ```
+                    </section>
+
+                    <section data-markdown>
+                        ### Live migration issues
 
                         * Enable auto convergence
                             - cpu throttling
                             - Need qemu 2.5 / libvirt 1.3.3
 
-                        ```
+                        ```bash
                         /etc/nova/nova.conf
 
+                        # Juno
                         block_migration_flag= ... , VIR_MIGRATE_AUTO_CONVERGE
                         live_migration_flag= ..., VIR_MIGRATE_AUTO_CONVERGE
+
+                        # Newton
+                        live_migration_permit_auto_converge=True
                         ```
                     </section>
                     <section data-markdown>
