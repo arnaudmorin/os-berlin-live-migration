@@ -101,12 +101,19 @@
                         * Environment
                             - Juno on Ubuntu Trusty
                             - Qemu 2.3 / libvirt 1.3.1
+                            - Dedicated network for admin
 
-                        * Maintenance / kernel upgrade process
-                            - Live migrate all instances
-                            - schema
+                        * When do we need live migration ?
+                            - Need to empty a compute node
+                                - Hardware maintenance
+                                - Software issue
+                                - Kernel upgrade
+                                - microcode update
+                    </section>
+                    <section data-markdown>
+                        ## Workflow
 
-                        * A bug is triggered
+                        * A bug is triggered by live migration
                             - Try to reproduce it in an Openstack dev environment
                             - Find root cause
                             - Check if an upstream fix is already existing
@@ -205,22 +212,41 @@
 
                 <section>
                     <section data-markdown>
-                        ## Upgrade to newton
+                        ## Tools
                     </section>
                     <section data-markdown>
-                        ## Blabla
+                        ## Automation
+                        - run-cli
                     </section>
+                    <section data-markdown>
+                        ## Automation
+                        - mistral workflow
+                    </section>
+
+                    <section data-markdown>
+                        ## Monitoring / Stats
+                        - collect data and push to backend
+                            - Python script using libvirt api on compute nodes
+                                - virsh domjobinfo after succcessful migration
+                            - Noderig (https://github.com/ovh/noderig)
+                            - Beamium (https://github.com/ovh/beamium)
+                            - Warp10 timeseries backend
+                    </section>
+
+                    <section data-markdown>
+                        ## Monitoring / Stats
+                            - Dashboard using grafana
+                    </section>
+
                 </section>
 
                 <section>
                     <section data-markdown>
-                        ## Tooling
+                        ## Upgrade to newton
                     </section>
                     <section data-markdown>
-                        ## Blabla
                     </section>
                 </section>
-
 
                 <section data-markdown data-background="data/camion_plot.gif">
                     ## Questions?
