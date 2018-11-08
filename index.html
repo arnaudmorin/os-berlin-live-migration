@@ -105,6 +105,16 @@
                         * Maintenance / kernel upgrade process
                             - Live migrate all instances
                             - schema
+
+                        * A bug is triggered
+                            - Try to reproduce it in an Openstack dev environment
+                            - Find root cause
+                            - Check if an upstream fix is already existing
+                                - Cherry pick on our Openstack env
+                            - If not fixed upstream
+                                - Need to be fixed quickly
+                                    - workaround
+                                    - openstack patch
                     </section>
                     <section data-markdown data-background="data/headache.gif">
                         ## Multiple instances cases
@@ -140,7 +150,6 @@
 
                         ```
                     </section>
-
                     <section data-markdown>
                         ### Live migration issues
 
@@ -160,12 +169,37 @@
                         ```
                     </section>
                     <section data-markdown>
+                        ### Live migration issues
+                        - Issues with ceph volumes
+                        migrateToURI3
+                    </section>
+
+                    <section data-markdown>
+                        ### Live migration issues
+                        - config drive
+                    </section>
+
+                    <section data-markdown>
+                        ### Live migration issues
+                        - Fix theses issues on Juno:
+                            - same version of Qemu / libvirt on our Juno/Newton infra
+                                - Qemu 2.5
+                                - libvirt - python-libvirt 1.3.3
+                        - Package compilation for Ubuntu Trusty
+                    </section>
+
+                    <section data-markdown>
+                        ### Live migration issues
+
+                        - Futur improvements:
+                            - live migration with CPU Pinning
+                            - migrate from node with qemu qcow2 disk => raw disk
+                    </section>
+
+                    <section data-markdown>
                         ### Patching / cherry-picking
                         #### migrateToURI3
                         #### multiple cases
-                    </section>
-                    <section data-markdown>
-                        ### BLABLA
                     </section>
                 </section>
 
