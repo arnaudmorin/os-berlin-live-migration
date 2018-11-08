@@ -69,16 +69,28 @@
                 </section>
 
                 <section>
-                    <section data-markdown>
-                        ## The topic of this talk
-                    </section>
-                    <section data-markdown>
-                        ### Live migration
-                    </section>
-                    <section data-markdown>
-                        ### Upgrade from Juno to Newton
-                    </section>
-                </section>
+                     <section data-markdown>                                      
+                         ## Context
+                         * almost 25 openstack regions                            
+                         * more than 11k computes                                 
+                         * almost 300k instances
+                         * oldest regions are using OpenStack JUNO                
+                         * newest regions are using OpenStack NEWTON              
+                     </section>
+                     <section data-markdown>                                      
+                         ### Live migration                                       
+                         * maintenance purpose (kernel upgrade, compute reinstall)
+                         * more live-migration --> more bugs                      
+                         * Spectre / meltdown / foreshadow                        
+                     </section>
+                     <section data-markdown>                                      
+                         ### Upgrade from Juno to Newton                          
+                         * keep consistency between infra
+                         * drop old releases                                      
+                         * bring new services                                     
+                         * Newton --> easier to upgrade to newer releases
+                     </section>
+                 </section>                                                       
 
                 <section>
                     <section data-markdown>
