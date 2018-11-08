@@ -3,7 +3,7 @@
  *
  * By Hakim El Hattab, http://hakim.se
  */
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/open-sans/open-sans.css);
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
   color: #0a6270; }
 
@@ -15,8 +15,8 @@ body {
   background-color: #0a6270; }
 
 .reveal {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-size: 42px;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 32px;
   font-weight: normal;
   color: #fff; }
 
@@ -46,7 +46,7 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #fff;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: normal;
@@ -290,11 +290,3 @@ body {
   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
-
-
-/* OVH logo */
-body:after {
-content: url(../../data/logo-ovh-meet-up-yellow.png);
-position: fixed;
-top: 1.5em;
-left: 1.5em;
