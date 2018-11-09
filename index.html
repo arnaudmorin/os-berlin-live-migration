@@ -310,7 +310,21 @@
 
                     <section data-markdown>
                         ## Monitoring / Stats - Alerting
-                        - probe deployed on compute nodes
+                        Alerting probes deployed on compute nodes
+                        ```bash
+                        [root@host772847.preprod.gra1.cloud.ovh.net ~] instance-routed --debug
+                        [ DEBUG   ]  Scanning (icmp) following 4 ips:
+                        [ DEBUG   ]  10.92.135.33 10.92.135.77 10.92.135.78 10.92.135.147
+                        [ DEBUG   ]  1 ips did not replied:
+                        [ DEBUG   ]  10.92.135.78
+                        [ DEBUG   ]  10.92.135.78 does not have static route in ns-link!!
+                        [ DEBUG   ]  Trying again MTR check:
+                        [ DEBUG   ]  10.92.135.78 does not have static route in ns-link!!
+                        [ INFO    ]  1 ips are not correcly routed:
+                        [ DEBUG   ]  10.92.135.78
+                        [ INFO    ]  Set oco status: 210
+                        [ DEBUG   ]  Write oco status: 210
+                        ```
                         - detect a possible post live migration issue
                             - cleanup on source node
                             - is everything well on destination ?
