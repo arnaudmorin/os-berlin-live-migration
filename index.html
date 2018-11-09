@@ -79,7 +79,7 @@
                         ## Nova live migration
                     </section>
                     <section data-markdown>
-                        ## Workflow
+                        ## Context
 
                         * Environment
                             - Juno on Ubuntu Trusty
@@ -103,25 +103,27 @@
                                 - Cherry pick on our OpenStack env
                             - If not fixed upstream
                                 - Need to be fixed quickly
-                                    - workaround
-                                    - OpenStack patch
+                                    - local workaround
+                                    - OpenStack upstream patch
                     </section>
                     <section data-markdown>
-                        ## Multiple instances cases
-                        * local disk
-                        * ceph disk
-                        * \+ cinder volume
-                        * \+ config drive
-                        * \+ GPU
-                        * \+ FPGA
-                        * \+ different CPU sockets
+                        ## Multiple instances profile
+                        * Why our live-migration is painful
+                          * local disk
+                          * ceph disk
+                        * Extra
+                          * cinder volume
+                          * config drive
+                          * GPU
+                          * FPGA
+                          * different CPU sockets
                     </section>
                     <section data-markdown>
                         ### Live migration issues
 
                         * Fail to live migrate on loaded instances
-                            - migration take long time or never finish
-                            - instance need to be suspended
+                            - migration takes ages or never finish
+                            - instance needs to be suspended
                             - reproduce case with stress-ng running on vm
 
                         ```bash
@@ -145,7 +147,9 @@
 
                         * Enable auto convergence
                             - cpu throttling
-                            - Need qemu 2.5 / libvirt 1.3.3
+                        * Use migrateToURI3
+
+                        => **Need qemu 2.5 / libvirt 1.3.3**
 
                         ```bash
                         /etc/nova/nova.conf
@@ -158,15 +162,27 @@
                         live_migration_permit_auto_converge=True
                         ```
                     </section>
-                    <section data-markdown>
-                        ### Live migration issues
-                        - Issues with ceph volumes
-                        migrateToURI3
-                    </section>
 
                     <section data-markdown>
                         ### Live migration issues
-                        - config drive
+                        config drive
+                        ```bash
+                        $ nova boot --config-drive True ...
+                        ```
+
+                        on compute host
+                        ```bash
+                        $ ls
+                        console.log  disk  disk.config  disk.info  libvirt.xml
+                        ```
+                        bug in libvirt, if config_drive_format=iso9660, read-only file
+
+
+                        Solution
+                        ```bash
+                        src = "%s:%s/disk.config" % (instance['host'], instance_dir)
+                        utils.execute('scp', src, instance_dir)
+                        ```
                     </section>
 
                     <section data-markdown>
@@ -347,9 +363,49 @@
 
                 <section data-background="data/slide.png">
                     <section data-markdown>
-                        ## Upgrade to newton
+                        ## Juno to newton
+                        #### a journey with OpenStack Upgrades
                     </section>
                     <section data-markdown>
+                        ## The easy part - computes
+                        Same libvirt / qemu version on Trusty and Xenial allowed upgrade on compute in a smooth way
+
+                        ```bash
+                        # OpenStack Juno on Trusty
+                        $ apt-cache policy libvirt-bin
+                        libvirt-bin:
+                          Installed: 1.3.3-2ubuntu2+ovh1~trusty
+
+                        # OpenStack Newton on Trusty
+                        $ apt-cache policy libvirt-bin
+                        libvirt-bin:
+                          Installed: 1.3.3-2ubuntu2+ovh1~trusty
+                        ```
+
+                        So, OpenStack upgrade is as easy as
+                        ```bash
+                        apt-get upgrade
+                        ```
+                    </section>
+                    <section data-markdown>
+                        ## The easy part - controllers
+                        Almost all control plane upgrade is easy, just need to reinstall those servers to move to Xenial with OpenStack Newton
+
+
+
+
+                        ## except ...
+                    </section>
+                    <section data-markdown>
+                        ## The hard part - databases
+                        Anybody that already upgrade OpenStack knows what this is...
+
+                        Our solution
+                        * Fast Forward Upgrade
+                        * Docker containers to perform alembic migrations
+                        * A good documentation
+                        * A working backup
+                        * A way to rollback
                     </section>
                 </section>
 
