@@ -187,11 +187,12 @@
 
                     <section data-markdown>
                         ### Live migration issues
-                        - Fix theses issues on Juno:
+                        - Solutions to fix our Juno deployment
                             - same version of Qemu / libvirt on our Juno/Newton infra
                                 - Qemu 2.5
                                 - libvirt - python-libvirt 1.3.3
                         - Package compilation for Ubuntu Trusty
+                        - Cherry-picking / patching in Nova code
                     </section>
 
                     <section data-markdown>
@@ -204,12 +205,6 @@
                             - libvirt migration features:
                                 - post copy (>= qemu 2.6)
                                 - compression
-                    </section>
-
-                    <section data-markdown>
-                        ### Patching / cherry-picking
-                        #### migrateToURI3
-                        #### multiple cases
                     </section>
                 </section>
 
@@ -384,7 +379,7 @@
 
                         So, OpenStack upgrade is as easy as
                         ```bash
-                        apt-get upgrade
+                        apt-get upgrade     # even easier when it's done by puppet
                         ```
                     </section>
                     <section data-markdown>
