@@ -56,14 +56,20 @@
                          ## Context
                          * almost 25 OpenStack regions
                          * almost 260k instances
-                         * oldest regions are using OpenStack JUNO
-                         * newest regions are using OpenStack NEWTON
+                         * oldest regions are using OpenStack Juno
+                         * newest regions are using OpenStack Newton
                      </section>
                      <section data-markdown>
-                         ### Live migration
-                         * maintenance purpose (kernel upgrade, compute reinstall)
-                         * more live-migration => more bugs
-                         * Spectre / meltdown / foreshadow
+                        ### When do we need live migration?
+                        * Need to empty a compute node
+                            * Hardware maintenance
+                            * Software issue
+                            * Kernel upgrade
+                            * microcode update
+                        * Spectre / meltdown / foreshadow
+                     </section>
+                     <section data-markdown>
+                        #### More live-migration => more bugs
                      </section>
                      <section data-markdown>
                          ### Upgrade from Juno to Newton
@@ -86,12 +92,9 @@
                             - Qemu 2.3 / libvirt 1.3.1
                             - Dedicated network for admin
 
-                        * When do we need live migration ?
-                            - Need to empty a compute node
-                                - Hardware maintenance
-                                - Software issue
-                                - Kernel upgrade
-                                - microcode update
+                        **We need an astonishing live-migration!**
+
+                        but that's not the case on vanilla OpenStack Juno...
                     </section>
                     <section data-markdown>
                         ## Workflow
@@ -406,7 +409,7 @@
                     </section>
                 </section>
 
-                <section data-markdown>
+                <section data-markdown data-background="data/slide.png">
                     ## Conclusion
                     * Backporting code to EOL OpenStack releases
                     * Automation is what you need
