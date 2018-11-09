@@ -95,7 +95,7 @@
                         but that's not the case on vanilla OpenStack Juno...
                     </section>
                     <section data-markdown>
-                        ## Multiple instances profile
+                        ## Multiple instance profiles
                         * Why our live-migration is painful
                           * local disk
                           * ceph disk
@@ -104,7 +104,7 @@
                           * config drive
                           * GPU
                           * FPGA
-                          * different CPU sockets
+                          * different CPU generations
                     </section>
                     <section data-markdown>
                         ## Workflow
@@ -112,7 +112,7 @@
                         * A bug is triggered by live migration
                             - Try to reproduce it in an OpenStack dev environment
                             - Find root cause
-                            - Check if an upstream fix is already existing
+                            - Check if an upstream fix already exists
                                 - Cherry pick on our OpenStack env
                             - If not fixed upstream
                                 - Need to be fixed quickly
@@ -125,7 +125,7 @@
                         ### Live migration issues
 
                         * Fail to live migrate on loaded instances
-                            - migration takes ages or never finish
+                            - migration takes ages or never finishes
                             - instance needs to be suspended
                             - reproduce case with stress-ng running on vm
 
@@ -167,12 +167,13 @@
                     <section data-markdown>
                         ### Live migration issues
 
-                        Juno use libvirt method migrateToURI2
+                        Juno uses libvirt method migrateToURI2
                         - We were unable to live migrate instances with both:
                             - local disk
                             - attached ceph volume
 
                         * Use migrateToURI3
+
                         => **Need qemu 2.5 / libvirt 1.3.3**
                     </section>
                     <section data-markdown>
@@ -200,7 +201,7 @@
                     <section data-markdown>
                         ### Live migration issues
 
-                        - Futur improvements:
+                        - Future improvements:
                             - OpenStack
                                 - live migration with CPU Pinning
                                 - migrate from node with qemu qcow2 disk => raw disk
@@ -251,8 +252,8 @@
         action: ovh.shell
         input:
           cmd: "ping -c10 <% $.ip_to_ping %>"
-        # depending of the result, we will send to the next actions if
-        # the instance pings or not
+        # we will go to the next action depending on
+        # wheter or not the instance pings
         publish:
           pingable: true
         publish-on-error:
@@ -312,7 +313,7 @@
                         [root@host772847.preprod.gra1.cloud.ovh.net ~] instance-routed --debug
                         [ DEBUG   ]  Scanning (icmp) following 4 ips:
                         [ DEBUG   ]  10.92.135.33 10.92.135.77 10.92.135.78 10.92.135.147
-                        [ DEBUG   ]  1 ips did not replied:
+                        [ DEBUG   ]  1 ips did not reply:
                         [ DEBUG   ]  10.92.135.78
                         [ DEBUG   ]  10.92.135.78 does not have static route in ns-link!!
                         [ DEBUG   ]  Trying again MTR check:
@@ -330,19 +331,19 @@
                     <section data-markdown>
                         ## Monitoring / Stats - Alerting
                         - Neutron
-                            - missing / orphaned BGP announce
+                            - missing / orphaned BGP announcement
                             - missing / orphaned openflow rules (private network)
                             - Port / OVS bridge / namespace created
-                            - arping ok (instance have security rules)
+                            - arping ok (instance has security rules)
                     </section>
                     <section data-markdown>
                         ## Monitoring / Stats - Alerting
                         - Nova
-                            - disk not cleanup on source
+                            - disk not cleaned up on source
 
                         - Mechanism to autoclean orphaned disk
-                            - first desactivated on our production
-                            - we reactivated it, because it just works !
+                            - at first, disabled on our production
+                            - we enabled it, because it just works !
 
                             ```
                             # nova.conf
@@ -379,7 +380,7 @@
                     </section>
                     <section data-markdown>
                         ## The easy part - computes
-                        Same libvirt / qemu version on Trusty and Xenial allowed upgrade on compute in a smooth way
+                        Same libvirt / qemu version on Trusty and Xenial allowed for smooth upgrade on compute nodes
 
                         ```bash
                         # OpenStack Juno on Trusty
@@ -409,7 +410,7 @@
                     </section>
                     <section data-markdown>
                         ## The hard part - databases
-                        Anybody that already upgrade OpenStack knows what this is...
+                        Anybody that already upgraded OpenStack knows what this is...
 
                         Our solution
                         * Fast Forward Upgrade
