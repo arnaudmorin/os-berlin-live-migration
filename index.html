@@ -42,11 +42,11 @@
                     <section data-markdown>
                         ### dedicated cloud
                     </section>
-                    <section data-markdown data-separator-notes="^note:">
+                    <section data-markdown>
                         ### public cloud
                     </section>
                     <section data-markdown data-background="data/nerds2.gif">
-                        # openstack
+                        # OpenStack
                         ![openstack](data/openstack_logo.png)
                     </section>
                 </section>
@@ -54,16 +54,15 @@
                 <section data-background="data/slide.png">
                      <section data-markdown>
                          ## Context
-                         * almost 25 openstack regions
-                         * more than 11k computes
-                         * almost 300k instances
+                         * almost 25 OpenStack regions
+                         * almost 260k instances
                          * oldest regions are using OpenStack JUNO
                          * newest regions are using OpenStack NEWTON
                      </section>
                      <section data-markdown>
                          ### Live migration
                          * maintenance purpose (kernel upgrade, compute reinstall)
-                         * more live-migration --> more bugs
+                         * more live-migration => more bugs
                          * Spectre / meltdown / foreshadow
                      </section>
                      <section data-markdown>
@@ -71,7 +70,7 @@
                          * keep consistency between infra
                          * drop old releases
                          * bring new services
-                         * Newton --> easier to upgrade to newer releases
+                         * Newton => easier to upgrade to newer releases
                      </section>
                  </section>
 
@@ -98,16 +97,16 @@
                         ## Workflow
 
                         * A bug is triggered by live migration
-                            - Try to reproduce it in an Openstack dev environment
+                            - Try to reproduce it in an OpenStack dev environment
                             - Find root cause
                             - Check if an upstream fix is already existing
-                                - Cherry pick on our Openstack env
+                                - Cherry pick on our OpenStack env
                             - If not fixed upstream
                                 - Need to be fixed quickly
                                     - workaround
-                                    - openstack patch
+                                    - OpenStack patch
                     </section>
-                    <section data-markdown data-background="data/headache.gif">
+                    <section data-markdown>
                         ## Multiple instances cases
                         * local disk
                         * ceph disk
@@ -183,7 +182,7 @@
                         ### Live migration issues
 
                         - Futur improvements:
-                            - openstack
+                            - OpenStack
                                 - live migration with CPU Pinning
                                 - migrate from node with qemu qcow2 disk => raw disk
                             - libvirt migration features:
