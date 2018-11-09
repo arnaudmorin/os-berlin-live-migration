@@ -212,6 +212,86 @@
                         ## Automation - mistral
                         ![ovh](data/ovh-cloudflow.gif)
                     </section>
+                    <section data-markdown>
+                        ## Automation - mistral
+                        * Workflows
+                          * inputs
+                          * tasks
+                            * actions
+                            * workflows
+                          * outputs
+                    </section>
+                    <section data-markdown>
+                        ## Automation - example workflow
+                        ```yaml
+  live-migrate:
+    description: A workflow that live migrates an instance
+    input:
+      - region
+      - vm
+                        ```
+                    </section>
+                    <section data-markdown>
+                        ## Automation - example workflow
+                        ```yaml
+...
+      ping_before:
+        action: ovh.shell
+        input:
+          cmd: "ping -c10 <% $.ip_to_ping %>"
+        # depending of the result, we will send to the next actions if
+        # the instance pings or not
+        publish:
+          pingable: true
+        publish-on-error:
+          pingable: false
+        on-complete:
+          - live_migrate
+...
+                        ```
+                    </section>
+                    <section data-markdown>
+                        ## Automation - example workflow
+                        ```yaml
+      live_migrate:
+        action: nova.servers_live_migrate
+        input:
+          action_region: <% $.region %>
+          server: <% $.vm.id %>
+          host: Null
+          block_migration: false    # We first try without block_migration
+          disk_over_commit: true
+        retry:
+          delay: 5
+          count: 1
+        wait-after: 10
+        on-success:
+          - wait_vm_active
+        on-error:
+          - live_block_migrate  # On error, we will try with block_migration
+                        ```
+                    </section>
+
+                    <section data-markdown>
+                        ## Automation - example workflow
+                        ```yaml
+      live_block_migrate:
+        action: nova.servers_live_migrate
+        input:
+          action_region: <% $.region %>
+          server: <% $.vm.id %>
+          host: Null
+          block_migration: true     # This is block_migration
+          disk_over_commit: true
+        retry:
+          delay: 5
+          count: 1
+        on-success:
+          - wait_vm_active
+        on-error:
+          - fail        # It also failed with block_migration, so fail
+                        ```
+                    </section>
 
                     <section data-markdown>
                         ## Monitoring / Stats
