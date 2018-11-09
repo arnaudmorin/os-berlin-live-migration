@@ -293,23 +293,55 @@
                     </section>
 
                     <section data-markdown>
+                        ## Monitoring / Stats - Alerting
+                        - probe deployed on compute nodes
+                        - detect a possible post live migration issue
+                            - cleanup on source node
+                            - is everything well on destination ?
+                        - Alerting handled by shinken
+                    </section>
+                    <section data-markdown>
+                        ## Monitoring / Stats - Alerting
+                        - Neutron
+                            - missing / orphaned BGP announce
+                            - missing / orphaned openflow rules (private network)
+                            - Port / OVS bridge / namespace created
+                            - arping ok (instance have security rules)
+                    </section>
+                    <section data-markdown>
+                        ## Monitoring / Stats - Alerting
+                        - Nova
+                            - disk not cleanup on source
+
+                        - Mechanism to autoclean orphaned disk
+                            - first desactivated on our production
+                            - we reactivated it, because it just works !
+
+                            ```
+                            # nova.conf
+                            running_deleted_instance_action=reap
+                            running_deleted_instance_poll_interval=7200
+                            running_deleted_instance_timeout=3600
+
+                            ```
+                    </section>
+                    <section data-markdown>
                         ## Monitoring / Stats
-                        - collect data and push to backend
+                        - collect data and push to timeseries backend
                             - Python script using libvirt api on compute nodes
-                                - virsh domjobinfo after succcessful migration
+                                - virsh domjobinfo after a succcessful migration
                             - Noderig (https://github.com/ovh/noderig)
                             - Beamium (https://github.com/ovh/beamium)
                             - Warp10 timeseries backend
                     </section>
-
                     <section data-markdown>
-                        ## Monitoring / Stats
-                            - Dashboard using grafana
+                        ## Monitoring / Stats - Grafana example
+                        ![ovh](data/ovh_nb_live_migration_total.png)
+                        ![ovh](data/nb_migration_per_day_february.png)
                     </section>
-
                     <section data-markdown>
-                        ## Monitoring / Stats
-                            - Alerting
+                        ## Monitoring / Stats - Grafana example
+                        ![ovh](data/migration_mean_elapsed_time_per_hour_per_region.png)
                     </section>
                 </section>
 
