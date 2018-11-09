@@ -150,7 +150,6 @@
 
                         * Enable auto convergence
                             - cpu throttling
-                        * Use migrateToURI3
 
                         => **Need qemu 2.5 / libvirt 1.3.3**
 
@@ -165,7 +164,17 @@
                         live_migration_permit_auto_converge=True
                         ```
                     </section>
+                    <section data-markdown>
+                        ### Live migration issues
 
+                        Juno use libvirt method migrateToURI2
+                        - We were unable to live migrate instances with both:
+                            - local disk
+                            - attached ceph volume
+
+                        * Use migrateToURI3
+                        => **Need qemu 2.5 / libvirt 1.3.3**
+                    </section>
                     <section data-markdown>
                         ### Live migration issues
                         config drive
