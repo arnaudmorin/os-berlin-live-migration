@@ -95,6 +95,18 @@
                         but that's not the case on vanilla OpenStack Juno...
                     </section>
                     <section data-markdown>
+                        ## Multiple instances profile
+                        * Why our live-migration is painful
+                          * local disk
+                          * ceph disk
+                        * Extra
+                          * cinder volume
+                          * config drive
+                          * GPU
+                          * FPGA
+                          * different CPU sockets
+                    </section>
+                    <section data-markdown>
                         ## Workflow
 
                         * A bug is triggered by live migration
@@ -106,18 +118,6 @@
                                 - Need to be fixed quickly
                                     - local workaround
                                     - OpenStack upstream patch
-                    </section>
-                    <section data-markdown>
-                        ## Multiple instances profile
-                        * Why our live-migration is painful
-                          * local disk
-                          * ceph disk
-                        * Extra
-                          * cinder volume
-                          * config drive
-                          * GPU
-                          * FPGA
-                          * different CPU sockets
                     </section>
                     <section data-markdown data-background="data/headache.gif">
                     </section>
